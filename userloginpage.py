@@ -20,8 +20,22 @@ def login():
     import login    
 
 def input():
-    root.destroy()
-    import inputboard  
+
+    conn = sqlite3.connect('ghumnajaau.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM user WHERE email = ? and password = ?',(entry1.get(), entry2.get()))
+    user_data = c.fetchone()
+    print(user_data)
+    if user_data != None:
+        if (entry1.get() and entry2.get()) in user_data :
+            tk.messagebox.showinfo('Successful','Login Successful!')
+
+            root.destroy()
+            import inputboard 
+        else:
+            tk.messagebox.showerror ('Error','Invalid credentials! ')
+    else:
+            tk.messagebox.showerror ('Error','Invalid credentials! ')
 
 def forgotpw():
     root.destroy()
@@ -121,134 +135,6 @@ show_password_checkbox.place(x=444, y=132, w=30,h=30)
 #login button
 btn=CTkButton(master=root, text="Log in",font=("Calibri",19, "bold"),text_color="#FFFFFF",fg_color="#000000",bg_color="#FCD419", command=input)
 btn.place(x=1350, y=220, w=132,h=34)
-
-def a_db_edit():
-
-        global win1, a_db_etrr1, a_db_etrr2
-        win1=tk.Toplevel()
-        win1.title("Edit Price")
-        win1.iconbitmap("logo.ico")
-        win1.geometry("500x250")
-        win1.resizable(0,0)
-        win1_main_frame=tk.Frame(win1,bg="#33303C")
-        win1_main_frame.place(relheight=1,relwidth=1,relx=0,rely=0)
-
-        a_db_labl1=tk.Label(win1_main_frame,text="Name:",font=("Regular",13),fg="white",bg="#33303C")
-        a_db_labl1.place(relx=0.05,rely=0.08)
-        a_db_etrr1=CTkEntry(win1_main_frame,font=("Regular",12),corner_radius=0,fg_color="White",border_color="Black",text_color="#33303C",placeholder_text="Nagarkot",placeholder_text_color="#33303c")
-        a_db_etrr1.place(relx=0.055,rely=0.17,relwidth=0.8,relheight=0.13)
-
-        a_db_labl2=tk.Label(win1_main_frame,text="Price:",font=("Regular",13),fg="white",bg="#33303C")
-        a_db_labl2.place(relx=0.05,rely=0.33)
-        a_db_etrr2=CTkEntry(win1_main_frame,font=("Regular",12),corner_radius=0,fg_color="White",border_color="Black",text_color="#33303C",placeholder_text="Rs.7250",placeholder_text_color="#33303C")
-        a_db_etrr2.place(relx=0.055,rely=0.43,relwidth=0.8,relheight=0.13)
-
-        a_db_btnn1=CTkButton(win1_main_frame,text="CANCEL",font=("Inter",15,"bold"),corner_radius=0,fg_color="White",border_color="Black",text_color="Red",hover_color="#D9D9D9",border_width=2,command=win1_cancel)
-        a_db_btnn1.place(relx=0.1,rely=0.75,relwidth=0.3,relheight=0.15)
-
-        a_db_btnn2=CTkButton(win1_main_frame,text="CONFIRM",font=("Inter",15,"bold"),corner_radius=0,fg_color="White",border_color="Black",text_color="Black",hover_color="#D9D9D9",border_width=2, command = update_food1)
-        a_db_btnn2.place(relx=0.6,rely=0.75,relwidth=0.3,relheight=0.15)
-def win4_cancel():
-        win1.destroy()
-
-def a_db_edit():
-
-        global win1, a_db_etrr1, a_db_etrr2
-        win2=tk.Toplevel()
-        win2.title("Edit Price")
-        win2.iconbitmap("logo.ico")
-        win2.geometry("500x250")
-        win2.resizable(0,0)
-        win2_main_frame=tk.Frame(win1,bg="#33303C")
-        win2_main_frame.place(relheight=1,relwidth=1,relx=0,rely=0)
-
-        a_db_labl1=tk.Label(win2_main_frame,text="Name:",font=("Regular",13),fg="white",bg="#33303C")
-        a_db_labl1.place(relx=0.05,rely=0.08)
-        a_db_etrr1=CTkEntry(win2_main_frame,font=("Regular",12),corner_radius=0,fg_color="White",border_color="Black",text_color="#33303C",placeholder_text="Nagarkot",placeholder_text_color="#33303c")
-        a_db_etrr1.place(relx=0.055,rely=0.17,relwidth=0.8,relheight=0.13)
-
-        a_db_labl2=tk.Label(win2_main_frame,text="Price:",font=("Regular",13),fg="white",bg="#33303C")
-        a_db_labl2.place(relx=0.05,rely=0.33)
-        a_db_etrr2=CTkEntry(win2_main_frame,font=("Regular",12),corner_radius=0,fg_color="White",border_color="Black",text_color="#33303C",placeholder_text="Rs.7250",placeholder_text_color="#33303C")
-        a_db_etrr2.place(relx=0.055,rely=0.43,relwidth=0.8,relheight=0.13)
-
-        a_db_btnn1=CTkButton(win2_main_frame,text="CANCEL",font=("Inter",15,"bold"),corner_radius=0,fg_color="White",border_color="Black",text_color="Red",hover_color="#D9D9D9",border_width=2,command=win1_cancel)
-        a_db_btnn1.place(relx=0.1,rely=0.75,relwidth=0.3,relheight=0.15)
-
-        a_db_btnn2=CTkButton(win2_main_frame,text="CONFIRM",font=("Inter",15,"bold"),corner_radius=0,fg_color="White",border_color="Black",text_color="Black",hover_color="#D9D9D9",border_width=2, command = update_food1)
-        a_db_btnn2.place(relx=0.6,rely=0.75,relwidth=0.3,relheight=0.15)
-def win4_cancel():
-        win1.destroy()
-
-
-
-def update_location1():
-        if a_db_etrr1.get() == '' or a_db_etrr2.get() == '':
-            tk.messagebox.showerror("Error","Please enter all fields")
-        elif (a_db_etrr2.get()).isdigit() == False:
-            tk.messagebox.showerror("Error","Price should be a number")
-        else:
-            conn = sqlite3.connect('ghumnajaau.db')
-            c = conn.cursor()
-            c.execute("UPDATE item SET item_price =? where rowid = ?", (a_db_etrr1.get(), 1))
-            conn.commit()
-            conn.close()
-            tk.messagebox.showinfo("Success","Price updated successfully")
-
-
-def update_location2():
-        if a_db_etrr1.get() == '' or a_db_etrr2.get() == '':
-            tk.messagebox.showerror("Error","Please enter all fields")
-        elif (a_db_etrr2.get()).isdigit() == False:
-            tk.messagebox.showerror("Error","Price should be a number")
-        else:
-            conn = sqlite3.connect('ghumnajaau.db')
-            c = conn.cursor()
-            c.execute("UPDATE item SET item_price =? where rowid = ?", (a_db_etrr1.get(), 1))
-            conn.commit()
-            conn.close()
-            tk.messagebox.showinfo("Success","Price updated successfully")
-
-
-
-def update_location3():
-        if a_db_etrr1.get() == '' or a_db_etrr2.get() == '':
-            tk.messagebox.showerror("Error","Please enter all fields")
-        elif (a_db_etrr2.get()).isdigit() == False:
-            tk.messagebox.showerror("Error","Price should be a number")
-        else:
-            conn = sqlite3.connect('ghumnajaau.db')
-            c = conn.cursor()
-            c.execute("UPDATE item SET item_price =? where rowid = ?", (a_db_etrr1.get(), 1))
-            conn.commit()
-            conn.close()
-            tk.messagebox.showinfo("Success","Price updated successfully")
-
-def update_location4():
-        if a_db_etrr1.get() == '' or a_db_etrr2.get() == '':
-            tk.messagebox.showerror("Error","Please enter all fields")
-        elif (a_db_etrr2.get()).isdigit() == False:
-            tk.messagebox.showerror("Error","Price should be a number")
-        else:
-            conn = sqlite3.connect('ghumnajaau.db')
-            c = conn.cursor()
-            c.execute("UPDATE item SET item_price =? where rowid = ?", (a_db_etrr1.get(), 1))
-            conn.commit()
-            conn.close()
-            tk.messagebox.showinfo("Success","Price updated successfully")
-
-def update_location5():
-        if a_db_etrr1.get() == '' or a_db_etrr2.get() == '':
-            tk.messagebox.showerror("Error","Please enter all fields")
-        elif (a_db_etrr2.get()).isdigit() == False:
-            tk.messagebox.showerror("Error","Price should be a number")
-        else:
-            conn = sqlite3.connect('ghumnajaau.db')
-            c = conn.cursor()
-            c.execute("UPDATE item SET item_price =? where rowid = ?", (a_db_etrr1.get(), 1))
-            conn.commit()
-            conn.close()
-            tk.messagebox.showinfo("Success","Price updated successfully")
 
 
 

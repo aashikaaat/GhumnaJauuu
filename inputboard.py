@@ -15,9 +15,14 @@ def logout():
     import login
 
 def dash():
-    root.destroy()
-    import nagarkot   
-    
+    if combobox1.get() == 'Select here.' or combobox2.get() == 'Select here.' or entry1.get() == '' or entry2.get() == '' :
+        tk.messagebox.showerror('Error', 'Enter all fields!' )
+        
+    else:
+
+        root.destroy()
+        import nagarkot   
+        
 # window resolution
 screenwidth= root.winfo_screenwidth()
 screenheight= root.winfo_screenheight()

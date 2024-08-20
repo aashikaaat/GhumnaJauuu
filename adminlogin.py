@@ -31,8 +31,12 @@ def login():
     import login
 
 def client():
-    root.destroy()
-    import admindash    
+    if entry1.get() == 'aashika@gmail.com' and entry2.get() == 'herooooo' : 
+
+        root.destroy()
+        import admindash    
+    else:
+        tk.messagebox.showerror('Error','Invalid credentials! ')
 
 def forgotpw():
     root.destroy()

@@ -41,39 +41,28 @@ photo_image = ImageTk.PhotoImage(pil_image)
 label = tk.Label(root, image=photo_image)
 label.pack()
 
-def adm_signup():   #Function to open security page after sigining up
+def user_signup():   #Function to open security page after sigining up
    
     conn = sqlite3.connect('ghumnajaau.db')   #creating database
     c = conn.cursor()  #'cursor()' for executing the queries
     c.execute("""
-              CREATE TABLE IF NOT EXISTS admin (
+              CREATE TABLE IF NOT EXISTS user (
                  first_name TEXT,
                  last_name TEXT,
                  email TEXT,
                  phone_number INT,
                  password TEXT
-                 sec_ans1 TEXT,
-                 sec_ans2 TEXT
                  
                  
                  
               )
            
               """)
-   
-    global adm_emails
-    c.execute("SELECT email FROM admin")
-    adm_emails = c.fetchall()
-    a=[]
-   
-    for email in adm_emails:
-    #saving the changes made in the database
-     a.append(email[0])
     conn.commit()
     conn.close()
  
     #checking if the entry boxes are filled and entered the valid credentials
-    if entry1.get() == '' or entry2.get() == '' or entry3.get() == '' or entry4.get() == '' or entry.get() == '' or entry1.get() == 'firstname' or entry2.get() == 'lastname' or entry3  .get() == 'example@gmail.com':
+    if entry1.get() == '' or entry2.get() == '' or entry3.get() == '' or entry4.get() == '' or entry.get() == '' or entry6.get() == '':
             messagebox.showerror("Error", "Please fill all the required fields!")
     elif (entry1.get()).isalpha() == False or (entry2.get()).isalpha() == False:
            messagebox.showerror("Error", "Please enter valid first and last names!")    #show error for first and last names
@@ -87,15 +76,20 @@ def adm_signup():   #Function to open security page after sigining up
             messagebox.showerror("Error", "Password should be at least 8 characters long!")
    
     else:
-            if entry3.get() in a:
-                #show error
-                messagebox.showerror("Error", "Email already exists!")
-            else:
                messagebox.showinfo("Sucessful sign up!"," Now you need to fill the security questions for future security,incase you forget your password by filling the questions . ")
             #    adm_sign_fr.place_forget()
             #    security_pg_frm()  
+               conn = sqlite3.connect('ghumnajaau.db')   #creating database
+               c = conn.cursor()  #'cursor()' for executing the queries
+               c.execute('''INSERT INTO user (first_name, last_name, email,phone_number, password) 
+                         VALUES (?,?,?,?,?)''',
+                         ((entry1.get()).capitalize(),(entry2.get()).capitalize(),entry3.get(),entry4.get(),entry.get()))
+                #saving the changes made in the database
                root.destroy()
                import securitypage
+               conn.commit()
+               conn.close()
+               
 #Sign Up
 label1 = CTkLabel(master=root, text="Sign Up", font=("Be Vietnam", 40,"bold"), text_color="#000000", fg_color="#EEF52F")
 label1.place(x=160, y=250, w=190, h=82)
@@ -149,7 +143,7 @@ btn=CTkButton(master=root, text="Back",font=("Calibri",19, "bold"),text_color="#
 btn.place(x=160, y=570, w=132,h=34)
 
 #Next
-btn=CTkButton(master=root, text="Next",font=("Calibri",19, "bold"),text_color="#FFFFFF",fg_color="#000000",bg_color="#EEF52F",command=adm_signup)
+btn=CTkButton(master=root, text="Next",font=("Calibri",19, "bold"),text_color="#FFFFFF",fg_color="#000000",bg_color="#EEF52F",command=user_signup)
 btn.place(x=575, y=570, w=132,h=34)
 
 

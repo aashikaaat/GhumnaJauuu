@@ -28,7 +28,7 @@ customtkinter.set_appearance_mode("dark")
 
 
 
-def security_info():
+def inputboard():
         '''
         this function is made to show a message when user clicks submit on the security question page
         '''
@@ -43,25 +43,12 @@ def security_info():
         #checking if the entry is filled or not
         if entry1.get() == '' or entry2.get() == '':
             tk.messagebox.showerror("Error", "Please fill all the required fields!")
-        elif entry1.get().isdigit() == False:
-            tk.messagebox.showerror("Error", "Please enter a number in the first field!")
+        # elif entry1.get().isdigit() == False:
+        #     tk.messagebox.showerror("Error", "Please enter a number in the first field!")
         else:
+            root.destroy()
+            import inputboard
 
-           #inserting security answers to the database
-            conn = sqlite3.connect("mealmate.db")
-            c = conn.cursor()
-            
-            #updating security questions
-            #inserting data into the database
-            c.execute('''INSERT INTO user (first_name, last_name, email,phone_number, password, sec_ans1, sec_ans2) 
-                         VALUES (?,?,?,?,?,?,?)''',
-                         ((entry1.get()).capitalize(),(entry2.get()).capitalize(),entry3.get(),entry.get(),usec_entry1.get(), usec_entry2.get(), usec_entry3.get())
-                     )
-            conn.commit()
-            conn.close()
-            usign_sec_qsn_frame.place_forget()  
-            userloginpage()       
-            tk.messagebox.showinfo("Successful Message ","Security questions Entry Successful !")
 
 
 
