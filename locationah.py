@@ -3,7 +3,7 @@ from tkinter import *
 import customtkinter 
 import customtkinter as CTK
 from customtkinter import*
-import database
+import sqlite3
 from tkinter import ttk
 from PIL import Image, ImageTk
 
@@ -26,6 +26,14 @@ def logout():
     root.destroy()
     import login
 
+def dash():
+    root.destroy()
+    import admindash
+ 
+
+def clients():
+    root.destroy()
+    import clientdetails   
 
 # upperframe
 frame=customtkinter.CTkFrame(master=root, fg_color="#153519", corner_radius=0)
@@ -91,13 +99,13 @@ label1.place(x=100, y=65, w=150, h=36)
 
 
 #Dashboard
-bookingdate_btn=CTkButton(master=root, text="Dashboard",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0)
+bookingdate_btn=CTkButton(master=root, text="Dashboard",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0,command=dash)
 bookingdate_btn.place(x=0, y=250, w=380,h=117)
 bookingdate_indicate=tk.Label( bg="#FFFFFF")
 bookingdate_indicate.place(x=0, y=315, w=8, h=117)
 
 #Client
-clientid_btn=CTkButton(master=root, text="Client",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0)
+clientid_btn=CTkButton(master=root, text="Client",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0, command=clients)
 clientid_btn.place(x=0, y=343, w=380,h=117)
 clientid_indicate=tk.Label( bg="#FFFFFF")
 clientid_indicate.place(x=0, y=430, w=8, h=117)

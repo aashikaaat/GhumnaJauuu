@@ -3,20 +3,26 @@ from tkinter import *
 import customtkinter 
 import customtkinter as CTK
 from customtkinter import*
-import database
+import sqlite3
 from tkinter import ttk
 from PIL import Image, ImageTk
 
-
-
-
-
-
 root = customtkinter.CTk() #window
 root.iconbitmap("logo.ico")     
-root.title("घुम्न जाऔँ") #pa`ge title
+root.title("घुम्न जाऔँ") #page title
 
-global btn1,btn2,btn3
+def logout():
+    root.destroy()
+    import login
+
+def location():
+    root.destroy()
+    import locationah 
+
+def dash():
+    root.destroy()
+    import admindash  
+
 # screen
 frame=customtkinter.CTkFrame(master=root, fg_color="#FFFFFF", corner_radius=0)
 frame.place(x =0,y =0, w=1920, h=1080)
@@ -98,13 +104,13 @@ label1.place(x=100, y=65, w=150, h=36)
 
 
 #Dashboard
-bookingdate_btn=CTkButton(master=root, text="Dashboard",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#738600",hover_color="#000000",bg_color="#99B104", corner_radius=0)
+bookingdate_btn=CTkButton(master=root, text="Dashboard",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0,command=dash)
 bookingdate_btn.place(x=0, y=250, w=380,h=117)
 bookingdate_indicate=tk.Label( bg="#FFFFFF")
 bookingdate_indicate.place(x=0, y=315, w=8, h=117)
 
 #Client
-clientid_btn=CTkButton(master=root, text="Client",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0)
+clientid_btn=CTkButton(master=root, text="Client",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#738600",hover_color="#000000",bg_color="#99B104", corner_radius=0)
 clientid_btn.place(x=0, y=343, w=380,h=117)
 clientid_indicate=tk.Label( bg="#FFFFFF")
 clientid_indicate.place(x=0, y=430, w=8, h=117)
@@ -163,13 +169,13 @@ table.place(x =0,y =0, w=1150,h=33)
 
 
 #Location
-location_btn=CTkButton(master=root, text="Location",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0)
+location_btn=CTkButton(master=root, text="Location",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0,command=location)
 location_btn.place(x=0, y=436, w=380,h=117)
 location_indicate=tk.Label( bg="#FFFFFF")
 location_indicate.place(x=0, y=546, w=8, h=117)
 
 #Exit
-transport_btn=CTkButton(master=root, text="EXIT",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0)
+transport_btn=CTkButton(master=root, text="EXIT",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0, command=logout)
 transport_btn.place(x=0, y=529, w=380,h=117)
 transport_indicate=tk.Label( bg="#FFFFFF")
 transport_indicate.place(x=0, y=662, w=8, h=117)
