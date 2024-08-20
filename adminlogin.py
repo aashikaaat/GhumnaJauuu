@@ -32,7 +32,7 @@ def login():
 
 def client():
     root.destroy()
-    import clientinfo    
+    import admindash    
 
 def forgotpw():
     root.destroy()

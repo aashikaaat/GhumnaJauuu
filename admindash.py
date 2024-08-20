@@ -26,26 +26,36 @@ def logout():
     root.destroy()
     import login
 
+
 # upperframe
 frame=customtkinter.CTkFrame(master=root, fg_color="#153519", corner_radius=0)
 frame.place(x =0,y =0, w=1920, h=160)
 
 
 #insert image
-pil_image = Image.open("dashicon.png")
+pil_image1 = Image.open("dashicon.png")
 
 # imageresize
-pil_image = pil_image.resize((150,150))
+pil_image1 = pil_image1.resize((150,150))
 
 # Convert the PIL image to a PhotoImage object
-photo_image = ImageTk.PhotoImage(pil_image)
+photo_image = ImageTk.PhotoImage(pil_image1)
 
 # Create a Label widget to display the image
 label = tk.Label(root, image=photo_image)
 label.place(x=20, y=14, w=133, h=133)
 
 #to prevent images from being garbage collected
-label=pil_image
+label=pil_image1
+
+
+#welcome boss
+pil_image1=Image.open("welcomeboss.png")#insert image
+pil_image1=pil_image1.resize((601,588))#resize
+photo_image1=ImageTk.PhotoImage(pil_image1)#pil to photo image
+label1 = tk.Label(root, image=photo_image1)#label
+label1.place(x=700, y=350, w=601, h=588)
+label1=pil_image1
 
 #possible destination frame
 frame=customtkinter.CTkFrame(master=root, fg_color="#000000", corner_radius=0)
@@ -88,14 +98,14 @@ label1 = CTkLabel(master=root, text="Ghumna Jau", font=("Inter", 20,"bold"), tex
 label1.place(x=100, y=65, w=150, h=36)
 
 
-#Client Info
-bookingdate_btn=CTkButton(master=root, text="Client Info",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0)
+#Dashboard
+bookingdate_btn=CTkButton(master=root, text="Dashboard",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#738600",hover_color="#000000",bg_color="#99B104", corner_radius=0)
 bookingdate_btn.place(x=0, y=250, w=380,h=117)
 bookingdate_indicate=tk.Label( bg="#FFFFFF")
 bookingdate_indicate.place(x=0, y=315, w=8, h=117)
 
-#Booking
-clientid_btn=CTkButton(master=root, text="Booking",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0)
+#Client
+clientid_btn=CTkButton(master=root, text="Client",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0)
 clientid_btn.place(x=0, y=343, w=380,h=117)
 clientid_indicate=tk.Label( bg="#FFFFFF")
 clientid_indicate.place(x=0, y=430, w=8, h=117)
@@ -106,44 +116,11 @@ location_btn.place(x=0, y=436, w=380,h=117)
 location_indicate=tk.Label( bg="#FFFFFF")
 location_indicate.place(x=0, y=546, w=8, h=117)
 
-#Activity
-transport_btn=CTkButton(master=root, text="Activity",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#738600",hover_color="#000000",bg_color="#99B104", corner_radius=0)
+#Exit
+transport_btn=CTkButton(master=root, text="EXIT",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0,command=logout)
 transport_btn.place(x=0, y=529, w=380,h=117)
 transport_indicate=tk.Label( bg="#FFFFFF")
 transport_indicate.place(x=0, y=662, w=8, h=117)
-
-#Hotels
-hotel_btn=CTkButton(master=root, text="Hotels",font=("Inter",28, "bold"),text_color="#FFFFFF",fg_color="#99B104",hover_color="#738600",bg_color="#99B104", corner_radius=0)
-hotel_btn.place(x=0, y=622, w=380,h=117)
-hotel_indicate=tk.Label( bg="#FFFFFF")
-hotel_indicate.place(x=0, y=779, w=8, h=117)
-
-#GhumnaJau's Clients
-label1 = CTkLabel(master=root, text="GhumnaJau's Clients", font=("Jost", 35,"bold"), text_color="#000000", fg_color="#FFFFFF")
-label1.place(x=320, y=220, w=450, h=64)
-
-#Activity Booking Information
-label1 = CTkLabel(master=root, text="Activity Booking Information", font=("Jost", 28,"bold"), text_color="#000000", fg_color="#FFFFFF")
-label1.place(x=380, y=320, w=500, h=64)
-
-#Frame for table
-frame3=customtkinter.CTkFrame(master=root, fg_color="#D9D9D9", corner_radius=0)
-frame3.place(x =406,y =380, w=993, h=485)
-
-
-# Table
-table=ttk.Treeview(frame3, columns=('first','last','ph. no','location',),show='headings')
-table.heading('first', text='First name')
-table.heading('last', text='Last name')
-table.heading('ph. no', text='Phone no')
-table.heading('location', text='location')
-table.place(x =0,y =0, w=993, h=485)
-
-#insert values into table
-# table.insert(parent='',index=0,values=('John','Doe',"9876543210",'Johndoe@mail.com'))4
-
-btn=CTkButton(master=root, text="Log out",font=("Calibri",19, "bold"),text_color="#FFFFFF",fg_color="#000000",bg_color="#FFFFFF",command=logout)
-btn.place(x=1300, y=740, w=180,h=40)
 
 
 root.mainloop()
